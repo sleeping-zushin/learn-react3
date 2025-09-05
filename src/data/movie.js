@@ -1,6 +1,9 @@
 export const movies = [
   {
-    id: 1,
+    id:  async () => {
+    const response = await axios.get(baseURL + "/GetAllMedicines");
+    return response.data;
+  },
     title: "Inception",
     year: 2010,
     genre: ["Action", "Sci-Fi"],
