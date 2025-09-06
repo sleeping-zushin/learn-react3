@@ -8,6 +8,7 @@ import {
   Modal,
 } from "antd/lib";
 import React, { useState } from "react";
+import medicineApi from "../api/medicineApi";
 
 export const MovieAddForm = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -31,8 +32,21 @@ export const MovieAddForm = () => {
     console.log("Data after processed", {
       ...values,
       isDeleted: false,
-      createdat: values["createdat"].format("YYYY-MM-DDThh:mm:ss"),
+      createdat: values["createdat"].format("YYYY-MM-DDThh:mm:ssZ"),
     });
+
+    medicineApi
+      .addMedicine({
+        ...values,
+        isDeleted: false,
+        createdat: values["createdat"].format("YYYY-MM-DDThh:mm:ssZ"),
+      })
+      .then(() => {
+        console.log("Data summited");
+      })      
+      .catch(() => {
+        console.log("Data error");
+      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -68,14 +82,13 @@ export const MovieAddForm = () => {
               {
                 validator: (_, value) => {
                   if (value === "special@example.com")
-                    return Promise.reject("This email is not allowed!")
-                    //else return Promise.resolve();
+                    return Promise.reject("This email is not allowed!");
+                  //else return Promise.resolve();
 
                   if (value === "special2@example.com")
-                    return Promise.reject("This email is not allowed!")
-                    else return Promise.resolve()
+                    return Promise.reject("This email is not allowed!");
+                  else return Promise.resolve();
                 },
-                  
               },
             ]}
           >
@@ -90,18 +103,40 @@ export const MovieAddForm = () => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            label="Medicine Type"
+            name="type"
+            rules={[
+              { required: true, message: "Please input!" },
+              { min: 5, message: "Minimum 5 characters" },
+            ]}
           >
-            <Input.Password />
+            <Input />
           </Form.Item>
-          <Form.Item name="createdat" label="Date Picker">
+
+          <Form.Item
+            label="Medicine quantity"
+            name="quantity"
+            rules={[
+              { required: true, message: "Please input!" },
+              // { min: 5, message: "Minimum 5 characters" },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+
+          <Form.Item name="createdat" label="Date Picker Create Ai">
             <DatePicker />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" label={null}>
-            <Checkbox>Remember me</Checkbox>
+          <Form.Item
+            label="Medicine create by"
+            name="createby"
+            rules={[
+              { required: true, message: "Please input!" },
+              { min: 5, message: "Minimum 5 characters" },
+            ]}
+          >
+            <Input />
           </Form.Item>
 
           <Form.Item label={null}>
