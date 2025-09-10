@@ -6,6 +6,10 @@ const medicineApi = {
     const response = await axios.get(baseURL + "/GetAllMedicines");
     return response.data;
   },
+  getMedicineById: async (id) => {
+    const response = await axios.get(baseURL + "/GetMedicineById?id="+id);
+    return response.data;
+  },
   addMedicine: async (data) => {
     const response = await axios.post(baseURL + "/AddMedicine", data);
 

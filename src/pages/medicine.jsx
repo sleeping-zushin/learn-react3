@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import medicineApi from "../api/medicineApi";
 import { MovieAddForm } from "../components/MovieAddForm";
 import { Button, Card } from "antd";
+import { MainLayout } from "../layout/mainLayout";
 const { Meta } = Card; // Thêm dòng này để lấy Meta từ Card của antd
 export const MedicineList = () => {
   const [medicineList, setMedicineList] = useState([]);
@@ -20,27 +21,30 @@ export const MedicineList = () => {
     }
   };
   return (
-    <div>
-      <h1>Medicine List</h1>
+    <MainLayout>
+      <div>
+        <h1>Medicine List</h1>
 
-      <Button type="primary" onClick={fetchMedicines}>
-        Fetch Medicines
-      </Button>
-      {/* medicine list */}
-      <MovieAddForm />
+        <Button type="primary" onClick={fetchMedicines}>
+          Fetch Medicines
+        </Button>
+        {/* medicine list */}
+        <MovieAddForm />
 
-      {medicineList && medicineList.map((medicine) => (
-        <Card
-          hoverable
-          style={{ width: 240 }}
-          cover={<img alt="example" src={medicine.poster} />}
-        >
-          <Meta
-            title={medicine.medicinename}
-            description={medicine.createdby}
-          />
-        </Card>
-      ))}
-    </div>
+        {medicineList &&
+          medicineList.map((medicine) => (
+            <Card
+              hoverable
+              style={{ width: 240 }}
+              cover={<img alt="example" src={medicine.poster} />}
+            >
+              <Meta
+                title={medicine.medicinename}
+                description={medicine.createdby}
+              />
+            </Card>
+          ))}
+      </div>
+    </MainLayout>
   );
 };
