@@ -3,10 +3,11 @@ import medicineApi from "../api/medicineApi";
 import { MovieAddForm } from "../components/MovieAddForm";
 import { Button, Card } from "antd";
 import { MainLayout } from "../layout/mainLayout";
+import { useNavigate } from "react-router-dom";
 const { Meta } = Card; // Thêm dòng này để lấy Meta từ Card của antd
 export const MedicineList = () => {
   const [medicineList, setMedicineList] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchMedicines();
   }, []);
@@ -37,6 +38,9 @@ export const MedicineList = () => {
               hoverable
               style={{ width: 240 }}
               cover={<img alt="example" src={medicine.poster} />}
+              onClick={() => {
+                navigate(`/medicine/${medicine.medicineid}`);
+              }}
             >
               <Meta
                 title={medicine.medicinename}
