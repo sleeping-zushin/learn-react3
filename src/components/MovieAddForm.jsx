@@ -54,7 +54,7 @@ export const MovieAddForm = () => {
   return (
     <div>
       <Button type="primary" onClick={showAddModal}>
-        Open Modal
+        Add Medicine 
       </Button>
       <Modal
         title="Form add medicine"

@@ -4,7 +4,13 @@ import { Header } from "../Header";
 
 export const MainLayout = ({ children }) => {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={
+        { 
+          minHeight: "100vh", 
+          display: "flex", 
+          flexDirection: "column"
+         }
+      }>
       <header style={{ padding: 16, borderBottom: "1px solid #eee", marginBottom: 16 }}>
         <Header />
         <nav style={{ marginTop: 12, display: "flex", gap: 12 }}>
