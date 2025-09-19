@@ -12,6 +12,7 @@ export const MedicineList = () => {
   const [ listOrder, setListOrder ] = useState(""); // "", "asc", "desc"
 
   const navigate = useNavigate();
+  
   useEffect(() => {
     fetchMedicines();
   }, []);
@@ -33,6 +34,7 @@ export const MedicineList = () => {
   const filterListByStaff =  staffName && staffName.length >0 ?
     filteredList.filter(x => x.createdby && x.createdby.includes(staffName)) 
     : filteredList
+
     const orderedList = listOrder && listOrder === "" ?
       filterListByStaff
       : listOrder === "asc" ?
